@@ -1,0 +1,67 @@
+<div class="search-div">
+	<mat-form-field>
+		<mat-select [(value)] = "selected" >
+			<mat-option value = "Bangalore">Bangalore</mat-option>
+			<mat-option value = "Mumbai">Mumbai</mat-option>
+			<mat-option value = "Pune">Pune</mat-option>
+			<mat-option value = "Chennai">Chennai</mat-option>
+			<mat-option value = "Dehli">Dehli</mat-option>
+		</mat-select>
+	</mat-form-field>		
+	<mat-form-field class = "search-form-field" floatLabel="never">
+		<input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+		<button mat-button matsuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+			<mat-icon>Close</mat-icon>
+		</button>	
+	</mat-form-field>
+</div>
+<div class="mat-elevation-z8">
+    <mat-table [dataSource] = "dataSource">
+		<ng-container matColumnDef = "ifsc">
+			<mat-header-cell *matHeaderCellDef> IFSC </mat-header-cell>
+			<mat-cell *matCellDef="let user">{{user.ifsc}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef = "bank_id">
+			<mat-header-cell *matHeaderCellDef> BankID </mat-header-cell>
+			<mat-cell *matCellDef="let user">{{user.bank_id}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef = "branch">
+			<mat-header-cell *matHeaderCellDef> Branch </mat-header-cell>
+			<mat-cell *matCellDef="let user">{{user.branch}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef = "address">
+			<mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+			<mat-cell *matCellDef="let user">{{user.address}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef = "city">
+			<mat-header-cell *matHeaderCellDef> City </mat-header-cell>
+			<mat-cell *matCellDef="let user">{{user.city}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef = "district">
+			<mat-header-cell *matHeaderCellDef> District </mat-header-cell>
+			<mat-cell *matCellDef="let user">{{user.district}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef = "state">
+			<mat-header-cell *matHeaderCellDef> State </mat-header-cell>
+			<mat-cell *matCellDef="let user">{{user.state}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef = "bank_name">
+			<mat-header-cell *matHeaderCellDef> Bank Name </mat-header-cell>
+			<mat-cell *matCellDef="let user">{{user.bank_name}}</mat-cell>
+		</ng-container>
+		<ng-container matColumnDef = "action" class= "ex-button">
+			<mat-header-cell *matHeaderCellDef></mat-header-cell>
+			<mat-cell *matCellDef="let user">
+				<button mat-icon-button disabled>
+					<mat-icon>favorite</mat-icon>
+				</button>	
+			</mat-cell>
+		</ng-container>
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+	</mat-table>
+	<mat-paginator #paginator
+					[pageSize] = "5" 
+					[pageSizeOptions] = "[5,10,25,100]">
+	</mat-paginator>       
+</div>	
